@@ -39,6 +39,47 @@ Four states, one enum:
 .expanded(title: "Low battery", message: "12% remaining", color: .red)
 ```
 
+## Dynamic Island activities
+
+`kitoDynamicIsland` draws one black shape over the hardware island and springs it between three
+presentations — `.idle` (invisible over the real island), `.compact` (content either side of the
+camera) and `.expanded` (a large panel) — blurring content in and out as it changes. Tap to
+expand; tap outside or swipe up to collapse.
+
+```swift
+@State private var presentation = KitoIslandPresentation.compact
+
+ContentView()
+    .kitoDynamicIsland(presentation: $presentation) {
+        Image(systemName: "timer").foregroundStyle(.orange)      // compact, left
+    } trailing: {
+        Text("4:59").foregroundStyle(.orange)                    // compact, right
+    } expanded: {
+        TimerControls()                                          // the grown panel
+    }
+```
+
+It lines up with each model's island by reading the top safe area, and stays a floating pill
+anywhere else (a preview, a notch iPhone). `KitoIslandMetrics` adjusts size, corners and spacing.
+
+### Now Playing
+
+A ready-made music player, like Apple Music's: artwork and a live waveform when compact;
+artwork, title, a draggable scrubber and back / play-pause / forward when expanded.
+
+```swift
+.kitoNowPlayingIsland(
+    presentation: $presentation,
+    item: KitoNowPlayingItem(title: "Midnight Drive", artist: "Neon Coast",
+                             artwork: .gradient([.pink, .purple], symbol: "music.note"), duration: 214),
+    isPlaying: $isPlaying,
+    elapsed: $elapsed,
+    onPrevious: previous, onNext: next
+)
+```
+
+`KitoWaveform`, `KitoScrubber` and `KitoNowPlayingExpanded` are public for your own layouts.
+
 ## Real battery data
 
 `KitoBatteryMonitor` wraps `UIDevice`'s actual battery APIs — a genuine
