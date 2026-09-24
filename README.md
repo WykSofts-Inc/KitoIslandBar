@@ -1,5 +1,7 @@
 # KitoIslandBar
 
+**[Documentation](https://wyksofts-inc.github.io/KitoIslandBar/documentation/kitoislandbar/)**
+
 An in-app Dynamic-Island-style status pill for SwiftUI. Part of the
 [Kito](https://github.com/WykSofts-Inc/KitoDevKit) ecosystem.
 
