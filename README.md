@@ -96,6 +96,13 @@ Every iOS Simulator reports no real battery hardware; `islandBarState()`
 returns `.hidden` there rather than a fake percentage. Run on a real device
 to see it live.
 
+## Right-to-left
+
+The island's compact leading and trailing slots and the expanded layout mirror with the layout
+direction, like the system's own Live Activity regions. The Now Playing scrubber and its
+back / play / forward buttons stay left to right, as in Apple's players, so dragging always seeks
+where the finger is. The battery percentage label is formatted for the current locale.
+
 ## Installation
 
 ```swift

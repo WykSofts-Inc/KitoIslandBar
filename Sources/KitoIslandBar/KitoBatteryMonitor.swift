@@ -72,6 +72,6 @@ public final class KitoBatteryMonitor {
         } else {
             color = Color(red: 0.35, green: 0.85, blue: 0.55)
         }
-        return .progress(fraction: level, color: color, label: "\(percent)%")
+        return .progress(fraction: level, color: color, label: (Double(percent) / 100).formatted(.percent))
     }
 }
