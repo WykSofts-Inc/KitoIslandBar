@@ -108,6 +108,8 @@ public struct KitoNowPlayingExpanded: View {
                 Spacer()
             }
             .foregroundStyle(.white)
+            // Transport controls follow the direction of playback, not of reading.
+            .environment(\.layoutDirection, .leftToRight)
         }
     }
 
@@ -124,6 +126,7 @@ public struct KitoNowPlayingExpanded: View {
 }
 
 /// A draggable progress track with elapsed and remaining time, like the system player's.
+/// It runs left to right in every layout direction, like the transport controls.
 public struct KitoScrubber: View {
     @Binding var elapsed: TimeInterval
     let duration: TimeInterval
@@ -165,6 +168,7 @@ public struct KitoScrubber: View {
         }
         .font(.caption2.monospacedDigit().weight(.medium))
         .foregroundStyle(.white.opacity(0.55))
+        .environment(\.layoutDirection, .leftToRight)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Playback position")
         .accessibilityValue("\(Self.format(elapsed)) of \(Self.format(duration))")
